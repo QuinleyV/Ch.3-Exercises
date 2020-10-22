@@ -1,0 +1,86 @@
+//Last worked 10/21/2020 by John Q. Vickers
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+
+float BONUS = 0.05;
+float TAXES = 0.30;
+
+int main() {
+    ifstream inFile;
+    ofstream outFile;
+
+    //opens the in/out file
+    inFile.open("inData.txt");
+    outFile.open("outData.txt");
+
+    //Variable names to store things from the file
+    string firstName;
+    string lastName;
+    string department;
+    float grossSalary;
+    float commission;
+    float tax_rate;
+    float distance;
+    float travelTime;
+    float cupSold;
+    float costCup;
+
+    // brings in all the information in the file and stores it in the variables
+    inFile >> firstName >> lastName >> department;
+    
+    inFile >> grossSalary >> commission >> tax_rate;
+
+    inFile >> distance >> travelTime;
+
+    inFile >> cupSold >> costCup;
+    
+    //Math for figuring out paycheck broken up into 3 parts
+    float bonus_pay = (grossSalary * BONUS) + grossSalary;
+    
+    float taxTakenOut = bonus_pay * TAXES;
+
+    float paycheck = bonus_pay - taxTakenOut;
+
+    // Formula for average speed
+    float avgSpeed = distance / travelTime;
+
+    //total sales for coffee cups sold
+    float sales_amount = cupSold * costCup;
+
+    //makes the numbers show the decimal and sets it to show two numbers past the decimal point
+    outFile << fixed << showpoint;
+    outFile << setprecision(2);
+    
+    outFile << "Name: " << firstName << " " << lastName << ", " <<  "Department: " << department << endl;
+
+    outFile << "Monthly Gross Salary: $" << grossSalary << ", " << "Monthly Bonus: " << commission << "%, " << "Taxes: " << tax_rate << "%" << endl;
+   
+    outFile << "Paycheck: $" << paycheck << endl;
+
+    //double space
+    outFile << " " << endl;
+    outFile << " " << endl;
+
+    outFile << "Distance Traveled: " << distance << " miles" << ", " << "Traveling Time: " << travelTime << " hours" << endl; 
+
+    outFile << "Average Speed: " << avgSpeed << " miles per hour" << endl;
+    
+    //double space
+    outFile << " " << endl;
+    outFile << " " << endl;
+
+    outFile << "Number of Coffee Cups Sold: " << static_cast<int>(cupSold) << ", " << "Cost: $" << costCup << " per cup" << endl;
+    
+    outFile << "Sales Amount = $" << sales_amount << endl;
+
+    
+    //closes in/out file
+    inFile.close();
+    outFile.close();
+    return 0;
+}
