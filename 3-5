@@ -1,0 +1,82 @@
+// Last worked by John Q. Vickers on 10/22/2020
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+
+    //declares in/out variable
+    ifstream inFile;
+    ofstream outFile;
+    
+    // variable for file that user inputs
+    string userFile;
+
+    // asks user the name of the file and inputs it
+    cout << "Enter the name of the name of the file: ";
+    getline(cin, userFile);
+
+    // opens the file that the user input
+    inFile.open(userFile);
+    
+    // opens output file
+    outFile.open("Ch3_Ex5Output.dat");
+
+    // variables for 1st line of file
+    string lastName, firstName;
+    float salary, payRaise;
+
+    // variables for 2nd line
+    string lastName2, firstName2;
+    double salary2, payRaise2;
+    
+    //variables for 3rd line    
+    string lastName3, firstName3;
+    float salary3, payRaise3;
+    
+    
+    // reads the first line of the file
+    inFile >> lastName >> firstName >> salary >> payRaise;
+
+    // reads the second line of the file
+    inFile >> lastName2 >> firstName2 >> salary2 >> payRaise2;
+
+    //reads the third line of the file
+    inFile >> lastName3 >> firstName3 >> salary3 >> payRaise3;
+
+    // new salary for 1st line in file
+    float updatedSalary = (salary * (payRaise/100)) + salary;
+
+    // new salary for 2nd line in file
+    double updatedSalary2 = (salary2 * (payRaise2/100))+ salary2;
+
+    // new salary for 3rd line in file
+    float updatedSalary3 = (salary3 * (payRaise3/100))+ salary3;
+
+    // sets 2 places past decimal
+    outFile << fixed << setprecision(2);
+    
+    // outputs 1st line from file
+    outFile << firstName << " " << lastName << " " << updatedSalary;
+    
+    outFile << endl;
+
+    // outputs 2nd line from file
+    outFile << firstName2 << " " << lastName2 << " " << updatedSalary2;
+
+    outFile << endl;
+
+    // outputs 3rd line from file
+    outFile << firstName3 << " " << lastName3 << " " << updatedSalary3;
+    
+    // closes in/out file
+    inFile.close();
+    outFile.close();
+
+
+    return 0;
+}
